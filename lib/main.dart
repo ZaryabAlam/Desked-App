@@ -1,7 +1,6 @@
+import 'package:desked/home.dart';
 import 'package:desked/login.dart';
 import 'package:flutter/material.dart';
-
-import 'home.dart';
 
 void main() {
   runApp(MyApp());
