@@ -23,21 +23,21 @@ class _LogState extends State<Log> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  height: _h * 0.4,
-                  width: _w * 0.4,
+                  height: _h * 0.3,
+                  width: _w * 0.3,
                   child: Image.network("https://i.ibb.co/phMFH8K/corner1.png"),
                 ),
               ],
             )),
             Positioned(
-              left: 0,
-              bottom: 0,
+              left: -4,
+              bottom: -2,
               child: Container(
-                height: _h * 0.4,
-                width: _w * 0.4,
+                height: _h * 0.28,
+                width: _w * 0.3,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage("https://i.ibb.co/tCLrDQm/corner2.png"),
+                    image: NetworkImage("https://i.ibb.co/Tvgwft0/corner2.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
