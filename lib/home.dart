@@ -7,8 +7,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  List<dynamic> lst = [""];
+  var out = "";
+
   Widget build(BuildContext context) {
+    final _h = MediaQuery.of(context).size.height;
+    final _w = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
 /////////////////////////////////////////////////////////////////////////////////////////////////////
       appBar: AppBar(
         title: Text("Desked"),
@@ -33,7 +39,31 @@ class _HomeState extends State<Home> {
           elevation: 2,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle_rounded, color: Colors.grey),
+              icon: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: TextField(
+                              onChanged: (value) {
+                                out = value;
+                              },
+                            ),
+                            actions: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    setState(() {
+                                      lst.add(out);
+                                    });
+                                  },
+                                  child: Text('Add'))
+                            ],
+                          );
+                        });
+                  },
+                  child: Icon(Icons.add_circle_rounded, color: Colors.grey)),
               label: 'Add',
             ),
             BottomNavigationBarItem(
@@ -46,9 +76,100 @@ class _HomeState extends State<Home> {
             ),
           ]),
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-      body: Column(
-        children: [Text("Desked")],
+      body: ListView.builder(
+        itemCount: lst.length,
+        itemBuilder: (context, index) {
+          return SafeArea(
+              child: Column(
+            children: [
+              SizedBox(
+                height: _h * 0.01,
+              ),
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.black26,
+                    borderRadius: BorderRadius.circular(_h * 0.04)),
+                height: _h * 0.20,
+                width: _w * 0.95,
+                child: ListTile(
+                  title: Text("${lst[index]}"),
+                  trailing: Container(
+                    padding: const EdgeInsets.only(top: 10),
+                    width: _w * 0.15,
+                    child: Row(
+                      children: [
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: TextField(
+                                      onChanged: (value) {
+                                        out = value;
+                                      },
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            setState(() {
+                                              lst.replaceRange(
+                                                  index, index + 1, {out});
+                                            });
+                                          },
+                                          child: Text('Edit'))
+                                    ],
+                                  );
+                                });
+                          },
+                          child: Icon(Icons.edit),
+                        ),
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              lst.removeAt(index);
+                            });
+                          },
+                          child: Icon(Icons.delete),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ));
+        },
       ),
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: TextField(
+                  onChanged: (value) {
+                    out = value;
+                  },
+                ),
+                actions: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        setState(() {
+                          lst.add(out);
+                        });
+                      },
+                      child: Text('Add'))
+                ],
+              );
+            });
+      }),
+/////////////////////////////////////////////////////////////////////////////////////////////////////
     );
   }
 }
