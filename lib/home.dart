@@ -1,4 +1,6 @@
+import 'new.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -20,10 +22,25 @@ class _HomeState extends State<Home> {
         title: Text("Desked"),
         automaticallyImplyLeading: false,
         elevation: 0,
-        leading: IconButton(icon: Icon(Icons.menu_rounded), onPressed: () {}),
+        leading: IconButton(
+            icon: Icon(Icons.menu_rounded),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => New()));
+            }),
         actions: [
-          IconButton(icon: Icon(Icons.swap_vert_rounded), onPressed: () {}),
-          IconButton(icon: Icon(Icons.filter_alt_rounded), onPressed: () {}),
+          IconButton(
+              icon: Icon(Icons.swap_vert_rounded),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => New()));
+              }),
+          IconButton(
+              icon: Icon(Icons.filter_alt_rounded),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => New()));
+              }),
         ],
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -67,11 +84,22 @@ class _HomeState extends State<Home> {
               label: 'Add',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.edit, color: Colors.grey),
+              icon: GestureDetector(
+                  onTap: () {
+                    ToastContext().init(context);
+                    showToast("Try to edit from tasks", gravity: Toast.bottom);
+                  },
+                  child: Icon(Icons.edit, color: Colors.grey)),
               label: 'Edit',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.delete_rounded, color: Colors.grey),
+              icon: GestureDetector(
+                  onTap: () {
+                    ToastContext().init(context);
+                    showToast("Try to delete from tasks",
+                        gravity: Toast.bottom);
+                  },
+                  child: Icon(Icons.delete_rounded, color: Colors.grey)),
               label: 'Delete',
             ),
           ]),
@@ -201,4 +229,8 @@ class _HomeState extends State<Home> {
 /////////////////////////////////////////////////////////////////////////////////////////////////////
     );
   }
+}
+
+void showToast(String msg, {duration, gravity}) {
+  Toast.show(msg, duration: duration, gravity: gravity);
 }

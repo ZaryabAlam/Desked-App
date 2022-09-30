@@ -1,3 +1,4 @@
+import 'package:desked/new.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'home.dart';
@@ -144,7 +145,7 @@ class _LogState extends State<Log> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                          MaterialPageRoute(builder: (context) => New()));
                     },
                     child: Text(
                       "Forget your password?",
@@ -200,7 +201,7 @@ class _LogState extends State<Log> {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Home()));
+                            MaterialPageRoute(builder: (context) => New()));
                       },
                       child: Text(
                         "Create!",

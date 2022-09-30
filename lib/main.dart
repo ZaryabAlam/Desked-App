@@ -1,5 +1,7 @@
 import 'package:desked/home.dart';
 import 'package:desked/login.dart';
+import 'package:desked/new.dart';
+import 'package:desked/toast.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Log(),
+        body: Home(),
       ),
     );
   }
